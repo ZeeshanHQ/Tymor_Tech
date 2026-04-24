@@ -13,7 +13,7 @@ interface Text3DFlipProps {
   staggerDuration?: number;
   staggerFrom?: "first" | "last" | "center";
   transition?: {
-    type: string;
+    type: any;
     damping?: number;
     stiffness?: number;
   };

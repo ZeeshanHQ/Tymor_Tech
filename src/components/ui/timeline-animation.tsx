@@ -1,14 +1,14 @@
 'use client'
 
 import { motion, useInView, useAnimation } from "framer-motion"
-import { useRef, useEffect, ReactNode } from "react"
+import React, { useRef, useEffect, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 interface TimelineContentProps {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   children: ReactNode
   animationNum?: number
-  timelineRef?: React.RefObject<HTMLDivElement>
+  timelineRef?: React.RefObject<HTMLDivElement | null>
   customVariants?: {
     visible: (i: number) => any
     hidden: any
@@ -26,7 +26,7 @@ export function TimelineContent({
   ...props
 }: TimelineContentProps) {
   const controls = useAnimation()
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<any>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   useEffect(() => {
@@ -40,8 +40,10 @@ export function TimelineContent({
     hidden: { opacity: 0, y: 20 },
   }
 
+  const DynamicComponent = Component as any
+
   return (
-    <Component
+    <DynamicComponent
       ref={ref}
       className={cn(className)}
       {...props}
@@ -54,6 +56,6 @@ export function TimelineContent({
       >
         {children}
       </motion.div>
-    </Component>
+    </DynamicComponent>
   )
 }

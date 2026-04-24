@@ -35,7 +35,7 @@ const transitionVariants = {
             },
         },
     },
-}
+} as const
 
 export function HeroSection() {
     const [isMuted, setIsMuted] = React.useState(true)
